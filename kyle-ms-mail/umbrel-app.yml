@@ -4,7 +4,7 @@ name: MS Mail
 tagline: The new Outlook for Windows, in your browser
 icon: https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/kyle-ms-mail/icon.svg
 category: files
-version: "1.1.0"
+version: "1.2.0"
 port: 18080
 path: "/#/client/T3V0bG9vawBjAGRlZmF1bHQ="
 description: >-
@@ -39,8 +39,9 @@ repo: https://github.com/kyleken/umbrel_outlook_box
 support: https://github.com/kyleken/umbrel_outlook_box/issues
 gallery: []
 releaseNotes: >-
-  Switched to the full Windows 11 Enterprise LTSC 2024 image, activated with
-  your own key. Only affects new installs.
+  "Outlook only" now launches the new Outlook through its app ID (packaged
+  apps can't be started by exe path over RemoteApp). New installs also turn
+  off automatic sign-in, which left a desktop session that blanked RemoteApp.
 dependencies: []
 defaultUsername: "outlook"
 deterministicPassword: true

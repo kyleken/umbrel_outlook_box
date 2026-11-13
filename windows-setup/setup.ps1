@@ -45,5 +45,13 @@ powercfg /change monitor-timeout-ac 0
 # No lock screen / screensaver interrupting remote sessions
 Set-ItemProperty -Path 'HKCU:\Control Panel\Desktop' -Name 'ScreenSaveActive' -Value '0' -ErrorAction SilentlyContinue
 
+# --- 5. Turn off automatic sign-in ------------------------------------------
+# A desktop session left signed in at boot makes Guacamole's "Outlook only"
+# (RemoteApp) connection show a blank screen. Sign-in now happens over RDP.
+$winlogon = 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon'
+Set-ItemProperty -Path $winlogon -Name 'AutoAdminLogon' -Value '0'
+Remove-ItemProperty -Path $winlogon -Name 'DefaultPassword' -ErrorAction SilentlyContinue
+Remove-ItemProperty -Path $winlogon -Name 'AutoLogonCount' -ErrorAction SilentlyContinue
+
 Write-Output 'Setup finished.'
 Stop-Transcript | Out-Null
