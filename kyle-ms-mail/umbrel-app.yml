@@ -4,11 +4,11 @@ name: MS Mail
 tagline: The new Outlook for Windows, in your browser
 icon: https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/kyle-ms-mail/icon.svg
 category: files
-version: "1.0.0"
+version: "1.1.0"
 port: 18080
 path: "/#/client/T3V0bG9vawBjAGRlZmF1bHQ="
 description: >-
-  An all-in-one mail box: a small Windows 11 virtual machine that installs the
+  An all-in-one mail box: a lean Windows 11 Enterprise LTSC virtual machine that installs the
   new Outlook for Windows automatically, plus Apache Guacamole so you can use
   it from any web browser, including over Tailscale.
 
@@ -27,8 +27,10 @@ description: >-
   enabled. Uses about 4.5 GB RAM and up to 64 GB of disk.
 
 
-  Windows 11 Pro runs unactivated (with a watermark) until you add your own
-  product key in Settings, then Activation.
+  Uses the full Windows 11 Enterprise LTSC 2024 image (not the evaluation,
+  which expires and shuts down every hour). Activate it with your own LTSC
+  key in Windows: Settings, then System, then Activation, then Change product
+  key.
 developer: Apache Guacamole and dockur
 website: https://guacamole.apache.org
 submitter: kyleken
@@ -37,7 +39,8 @@ repo: https://github.com/kyleken/umbrel_outlook_box
 support: https://github.com/kyleken/umbrel_outlook_box/issues
 gallery: []
 releaseNotes: >-
-  Initial release.
+  Switched to the full Windows 11 Enterprise LTSC 2024 image, activated with
+  your own key. Only affects new installs.
 dependencies: []
 defaultUsername: "outlook"
 deterministicPassword: true

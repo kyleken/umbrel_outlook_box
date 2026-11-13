@@ -12,7 +12,8 @@ services:
     restart: on-failure
     stop_grace_period: 2m
     environment:
-      VERSION: "11"             # Windows 11 Pro (the LTSC evaluation expires and shuts down hourly)
+      VERSION: "win11x64-enterprise-ltsc"  # full (non-evaluation) LTSC 2024; "11l" is the expiring evaluation
+      VERIFY: "Y"               # check the downloaded ISO against Microsoft's SHA-256
       RAM_SIZE: "4G"
       CPU_CORES: "2"
       DISK_SIZE: "64G"
