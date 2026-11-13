@@ -1,0 +1,43 @@
+manifestVersion: 1
+id: kyle-ms-mail
+name: MS Mail
+tagline: The new Outlook for Windows, in your browser
+icon: https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/kyle-ms-mail/icon.svg
+category: files
+version: "1.0.0"
+port: 18080
+path: "/#/client/T3V0bG9vawBjAGRlZmF1bHQ="
+description: >-
+  An all-in-one mail box: a small Windows 11 virtual machine that installs the
+  new Outlook for Windows automatically, plus Apache Guacamole so you can use
+  it from any web browser, including over Tailscale.
+
+
+  Opening the app connects straight to Outlook. Sign in to Guacamole with the
+  username and password shown on this page (the same ones Windows uses).
+
+
+  First start downloads and installs Windows unattended, which takes about
+  20-40 minutes. Until it finishes, the Outlook connection will fail; that is
+  normal. To watch progress, go to the Guacamole home page (Ctrl+Alt+Shift,
+  then Home) and open "Windows console (install progress)".
+
+
+  Requires an x86 Umbrel with hardware virtualization (Intel VT-x / AMD-V)
+  enabled. Uses about 4.5 GB RAM and up to 64 GB of disk.
+
+
+  Windows 11 Pro runs unactivated (with a watermark) until you add your own
+  product key in Settings, then Activation.
+developer: Apache Guacamole and dockur
+website: https://guacamole.apache.org
+submitter: kyleken
+submission: https://github.com/kyleken/umbrel_outlook_box
+repo: https://github.com/kyleken/umbrel_outlook_box
+support: https://github.com/kyleken/umbrel_outlook_box/issues
+gallery: []
+releaseNotes: >-
+  Initial release.
+dependencies: []
+defaultUsername: "outlook"
+deterministicPassword: true

@@ -4,15 +4,15 @@ name: Outlook Box
 tagline: A minimal Windows 11 LTSC that runs the new Outlook, in your browser
 icon: https://github.com/dockur/windows/raw/master/.github/logo.png
 category: files
-version: "1.0.0"
+version: "1.1.0"
 port: 18006
 description: >-
-  Runs Windows 11 IoT Enterprise LTSC (the leanest official Windows 11 build)
-  in a KVM-accelerated container using dockur/windows, and installs the new
-  Outlook for Windows automatically on first boot.
+  Runs Windows 11 Pro in a KVM-accelerated container using dockur/windows,
+  and installs the new Outlook for Windows automatically on first boot.
+  For browser access with clipboard and audio, use the MS Mail app instead.
 
 
-  First start downloads Windows (~4.7 GB) and installs it unattended. This
+  First start downloads Windows (~8 GB) and installs it unattended. This
   takes 15-30 minutes. Open the app to watch progress.
 
 
@@ -31,7 +31,10 @@ repo: https://github.com/dockur/windows
 support: https://github.com/dockur/windows/issues
 gallery: []
 releaseNotes: >-
-  Initial release.
+  Switched from the Windows 11 LTSC evaluation (which expires and shuts down
+  every hour) to Windows 11 Pro, and Outlook setup now runs from
+  windows-setup/setup.ps1. Only affects new installs: uninstall and reinstall
+  the app to get a fresh Windows.
 dependencies: []
 path: ""
 defaultUsername: "outlook"

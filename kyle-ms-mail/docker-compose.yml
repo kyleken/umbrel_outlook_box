@@ -1,0 +1,86 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      # Format: <app-id>_<docker-service-name>_1
+      APP_HOST: kyle-ms-mail_web_1
+      APP_PORT: 8080
+
+  # Windows 11 Pro VM with the new Outlook (set up by windows-setup/setup.ps1)
+  windows:
+    image: dockurr/windows:latest
+    restart: on-failure
+    stop_grace_period: 2m
+    environment:
+      VERSION: "11"             # Windows 11 Pro (no hourly shutdown when unactivated)
+      RAM_SIZE: "4G"
+      CPU_CORES: "2"
+      DISK_SIZE: "64G"
+      USERNAME: "outlook"
+      PASSWORD: ${APP_PASSWORD}
+      COMMAND: 'powershell -NoProfile -ExecutionPolicy Bypass -Command "New-Item -ItemType Directory -Force C:\OEM | Out-Null; Invoke-WebRequest -UseBasicParsing https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/windows-setup/setup.ps1 -OutFile C:\OEM\setup.ps1; & C:\OEM\setup.ps1"'
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ${APP_DATA_DIR}/data/storage:/storage
+
+  # Guacamole protocol daemon (speaks RDP to Windows)
+  guacd:
+    image: guacamole/guacd:1.6.0
+    restart: on-failure
+
+  # Guacamole web app (what you see in the browser)
+  web:
+    image: guacamole/guacamole:1.6.0
+    restart: on-failure
+    depends_on:
+      - guacd
+    environment:
+      GUACD_HOSTNAME: guacd
+      GUACD_PORT: "4822"
+      WEBAPP_CONTEXT: ROOT      # serve at / instead of /guacamole
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        mkdir -p /tmp/msmail
+        cat > /tmp/msmail/user-mapping.xml <<'EOF'
+        <user-mapping>
+          <authorize username="outlook" password="${APP_PASSWORD}">
+            <connection name="Outlook">
+              <protocol>rdp</protocol>
+              <param name="hostname">windows</param>
+              <param name="port">3389</param>
+              <param name="username">outlook</param>
+              <param name="password">${APP_PASSWORD}</param>
+              <param name="security">any</param>
+              <param name="ignore-cert">true</param>
+              <param name="resize-method">display-update</param>
+              <param name="enable-font-smoothing">true</param>
+              <param name="server-layout">en-us-qwerty</param>
+            </connection>
+            <connection name="Outlook only (experimental)">
+              <protocol>rdp</protocol>
+              <param name="hostname">windows</param>
+              <param name="port">3389</param>
+              <param name="username">outlook</param>
+              <param name="password">${APP_PASSWORD}</param>
+              <param name="security">any</param>
+              <param name="ignore-cert">true</param>
+              <param name="resize-method">display-update</param>
+              <param name="enable-font-smoothing">true</param>
+              <param name="remote-app">C:\Users\outlook\AppData\Local\Microsoft\WindowsApps\olk.exe</param>
+            </connection>
+            <connection name="Windows console (install progress)">
+              <protocol>vnc</protocol>
+              <param name="hostname">windows</param>
+              <param name="port">5900</param>
+            </connection>
+          </authorize>
+        </user-mapping>
+        EOF
+        export GUACAMOLE_HOME=/tmp/msmail
+        exec /opt/guacamole/bin/entrypoint.sh

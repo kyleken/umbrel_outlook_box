@@ -4,29 +4,33 @@ Community app store for umbrelOS.
 
 | App | What it does |
 | --- | --- |
-| **Outlook Box** (`kyle-outlook-box`) | Windows 11 LTSC in a container with the new Outlook auto-installed, viewable in the browser. |
+| **MS Mail** (`kyle-ms-mail`) | Recommended. Windows 11 Pro VM with the new Outlook, plus Apache Guacamole, so Outlook opens in any browser with clipboard and audio. |
+| **Outlook Box** (`kyle-outlook-box`) | Just the Windows VM with the new Outlook, viewed with the basic built-in web viewer or RDP on port 3389. |
+
+Install one or the other, not both: each one runs its own Windows VM.
 
 ## Add to Umbrel
 
-1. Push this folder to a **public** GitHub repo (or click "Use this template" on
-   `getumbrel/umbrel-community-app-store` and replace its files with these).
-2. In umbrelOS: **App Store → ⋯ (top right) → Community App Stores**, paste the
-   repo URL, click **Add**.
-3. Open the store and install **Outlook Box**.
+In umbrelOS: **App Store → ⋯ (top right) → Community App Stores**, paste
+`https://github.com/kyleken/umbrel_outlook_box`, click **Add**, then **Open**.
 
 ## Reach it over Tailscale
 
-Install the official **Tailscale** app from the Umbrel App Store and log in.
-Then from any device on your tailnet:
+Install the official **Tailscale** app from the Umbrel App Store and sign in.
+Then from any device on your tailnet open:
 
-- Browser: `http://<umbrel-tailscale-name>:18006`
-- RDP (better quality, clipboard, audio): `<umbrel-tailscale-name>:3389`,
-  user `outlook`, password shown on the app's page in umbrelOS.
+- MS Mail: `http://<umbrel-tailscale-name>:18080`
+- Outlook Box: `http://<umbrel-tailscale-name>:18006`, or RDP to `<umbrel-tailscale-name>:3389`
 
 ## Notes
 
-- Needs an x86 Umbrel with VT-x / AMD-V enabled. ~4 GB RAM, up to 64 GB disk.
-- First boot downloads and installs Windows unattended (15-30 min).
-- `oem/install.bat` installs the new Outlook at the end of setup; its log is
-  at `C:\OEM\install-log.txt`. It only runs on the *first* install.
-- Windows is not activated; use your own license if you want to activate it.
+- Needs an x86 Umbrel with VT-x / AMD-V enabled. About 4-4.5 GB RAM and up to 64 GB disk.
+- First boot downloads and installs Windows unattended (20-40 min).
+- `windows-setup/setup.ps1` runs once at the end of the Windows install. It
+  installs the new Outlook, opens it at sign-in, and allows RemoteApp. Its log
+  is at `C:\OEM\setup-log.txt`. To re-run it by hand, open PowerShell as
+  Administrator in Windows and run:
+  `iwr -UseBasicParsing https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/windows-setup/setup.ps1 | iex`
+- Windows 11 Pro is not activated. Add your own product key in
+  Settings → System → Activation.
+- This repo must stay **public**: the Windows VM downloads `setup.ps1` from it.
