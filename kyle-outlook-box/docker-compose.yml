@@ -1,0 +1,31 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      # Format: <app-id>_<docker-service-name>_1
+      APP_HOST: kyle-outlook-box_windows_1
+      APP_PORT: 8006
+
+  windows:
+    image: dockurr/windows:latest
+    restart: on-failure
+    stop_grace_period: 2m
+    environment:
+      VERSION: "11l"            # Windows 11 IoT Enterprise LTSC
+      RAM_SIZE: "4G"
+      CPU_CORES: "2"
+      DISK_SIZE: "64G"
+      USERNAME: "outlook"
+      PASSWORD: ${APP_PASSWORD} # Shown on the app's page in umbrelOS
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 3389:3389/tcp           # RDP for a better client than the web viewer
+      - 3389:3389/udp
+    volumes:
+      - ${APP_DATA_DIR}/data/storage:/storage
+      - ${APP_DATA_DIR}/oem:/oem # install.bat runs at the end of setup

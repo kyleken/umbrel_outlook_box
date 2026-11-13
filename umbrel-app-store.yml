@@ -1,0 +1,2 @@
+id: "kyle" # Every app ID in this store must start with "kyle-"
+name: "Kyle's" # Shows in umbrelOS as "Kyle's App Store"

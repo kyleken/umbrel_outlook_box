@@ -1,0 +1,38 @@
+manifestVersion: 1
+id: kyle-outlook-box
+name: Outlook Box
+tagline: A minimal Windows 11 LTSC that runs the new Outlook, in your browser
+icon: https://github.com/dockur/windows/raw/master/.github/logo.png
+category: files
+version: "1.0.0"
+port: 18006
+description: >-
+  Runs Windows 11 IoT Enterprise LTSC (the leanest official Windows 11 build)
+  in a KVM-accelerated container using dockur/windows, and installs the new
+  Outlook for Windows automatically on first boot.
+
+
+  First start downloads Windows (~4.7 GB) and installs it unattended. This
+  takes 15-30 minutes. Open the app to watch progress.
+
+
+  The in-browser viewer is convenient but basic (no clipboard or audio). For
+  daily use, connect with any RDP client to port 3389 on your Umbrel using the
+  username and password shown on this page.
+
+
+  Requires an x86 Umbrel with hardware virtualization (Intel VT-x / AMD-V)
+  enabled. Uses about 4 GB RAM and up to 64 GB of disk.
+developer: dockur
+website: https://github.com/dockur/windows
+submitter: kyle
+submission: https://github.com/dockur/windows
+repo: https://github.com/dockur/windows
+support: https://github.com/dockur/windows/issues
+gallery: []
+releaseNotes: >-
+  Initial release.
+dependencies: []
+path: ""
+defaultUsername: "outlook"
+deterministicPassword: true
