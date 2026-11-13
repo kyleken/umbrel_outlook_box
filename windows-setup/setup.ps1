@@ -29,14 +29,10 @@ $polKey = 'HKLM:\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services'
 New-Item -Path $polKey -Force | Out-Null
 Set-ItemProperty -Path $polKey -Name 'fAllowUnlistedRemotePrograms' -Type DWord -Value 1
 
-# --- 3. Open Outlook automatically at every sign-in ------------------------
-$startup = 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Start Outlook.cmd'
-$launcher = @'
-@echo off
-powershell -NoProfile -WindowStyle Hidden -Command "$a = (Get-StartApps | Where-Object { $_.AppID -like 'Microsoft.OutlookForWindows*' } | Select-Object -First 1).AppID; if ($a) { Start-Process explorer.exe ('shell:AppsFolder\' + $a) }"
-'@
-Set-Content -Path $startup -Value $launcher -Encoding ASCII
-Write-Output "Created $startup"
+# --- 3. No auto-start for Outlook -------------------------------------------
+# MS Mail's "Outlook" connection launches Outlook itself (RemoteApp). A Startup
+# shortcut would open a second copy, so remove the one older versions created.
+Remove-Item -Force -ErrorAction SilentlyContinue 'C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp\Start Outlook.cmd'
 
 # --- 4. Keep it light and always on ----------------------------------------
 powercfg /hibernate off

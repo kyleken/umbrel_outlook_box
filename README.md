@@ -27,7 +27,7 @@ Then from any device on your tailnet open:
 - Needs an x86 Umbrel with VT-x / AMD-V enabled. About 4-4.5 GB RAM and up to 64 GB disk.
 - First boot downloads and installs Windows unattended (20-40 min).
 - `windows-setup/setup.ps1` runs once at the end of the Windows install. It
-  installs the new Outlook, opens it at sign-in, and allows RemoteApp. Its log
+  installs the new Outlook, allows RemoteApp, and turns off automatic sign-in. Its log
   is at `C:\OEM\setup-log.txt`. To re-run it by hand, open PowerShell as
   Administrator in Windows and run:
   `iwr -UseBasicParsing https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/windows-setup/setup.ps1 | iex`
