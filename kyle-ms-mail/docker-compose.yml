@@ -73,8 +73,8 @@ services:
               <param name="ignore-cert">true</param>
               <param name="resize-method">display-update</param>
               <param name="enable-font-smoothing">true</param>
-              <param name="remote-app">C:\Windows\explorer.exe</param>
-              <param name="remote-app-args">shell:AppsFolder\Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows</param>
+              <param name="remote-app">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</param>
+              <param name="remote-app-args">-NoProfile -WindowStyle Hidden -Command "if (-not (Get-Process olk -ErrorAction SilentlyContinue | Where-Object MainWindowHandle -ne 0)) { Start-Process explorer.exe 'shell:AppsFolder\Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows' }"</param>
               <param name="remote-app-dir">C:\Windows</param>
             </connection>
             <connection name="Windows console (install progress)">

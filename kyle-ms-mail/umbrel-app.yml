@@ -4,7 +4,7 @@ name: MS Mail
 tagline: The new Outlook for Windows, in your browser
 icon: https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/kyle-ms-mail/icon.svg
 category: files
-version: "1.3.0"
+version: "1.4.0"
 port: 18080
 path: "/#/client/T3V0bG9vawBjAGRlZmF1bHQ="
 description: >-
@@ -42,8 +42,8 @@ repo: https://github.com/kyleken/umbrel_outlook_box
 support: https://github.com/kyleken/umbrel_outlook_box/issues
 gallery: []
 releaseNotes: >-
-  Opening MS Mail now goes straight to the Outlook-only view. The full
-  desktop is the "Windows desktop" connection on Guacamole's home page.
+  Reopening MS Mail now reconnects to the Outlook that's already running
+  instead of starting a second copy.
 dependencies: []
 defaultUsername: "outlook"
 deterministicPassword: true
