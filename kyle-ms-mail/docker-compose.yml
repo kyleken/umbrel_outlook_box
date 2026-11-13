@@ -51,7 +51,7 @@ services:
         cat > /tmp/msmail/user-mapping.xml <<'EOF'
         <user-mapping>
           <authorize username="outlook" password="${APP_PASSWORD}">
-            <connection name="Outlook">
+            <connection name="Windows desktop (sign out when done)">
               <protocol>rdp</protocol>
               <param name="hostname">windows</param>
               <param name="port">3389</param>
@@ -63,7 +63,7 @@ services:
               <param name="enable-font-smoothing">true</param>
               <param name="server-layout">en-us-qwerty</param>
             </connection>
-            <connection name="Outlook only (experimental)">
+            <connection name="Outlook">
               <protocol>rdp</protocol>
               <param name="hostname">windows</param>
               <param name="port">3389</param>

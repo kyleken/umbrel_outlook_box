@@ -4,7 +4,7 @@ name: MS Mail
 tagline: The new Outlook for Windows, in your browser
 icon: https://raw.githubusercontent.com/kyleken/umbrel_outlook_box/main/kyle-ms-mail/icon.svg
 category: files
-version: "1.2.0"
+version: "1.3.0"
 port: 18080
 path: "/#/client/T3V0bG9vawBjAGRlZmF1bHQ="
 description: >-
@@ -13,8 +13,11 @@ description: >-
   it from any web browser, including over Tailscale.
 
 
-  Opening the app connects straight to Outlook. Sign in to Guacamole with the
-  username and password shown on this page (the same ones Windows uses).
+  Opening the app shows just the Outlook window (no Windows desktop). For the
+  full desktop, press Ctrl+Alt+Shift, choose Home, then "Windows desktop".
+  Sign out of the desktop when you're done, or the Outlook-only view will be
+  blank. Sign in to Guacamole with the username and password shown on this
+  page (the same ones Windows uses).
 
 
   First start downloads and installs Windows unattended, which takes about
@@ -39,9 +42,8 @@ repo: https://github.com/kyleken/umbrel_outlook_box
 support: https://github.com/kyleken/umbrel_outlook_box/issues
 gallery: []
 releaseNotes: >-
-  "Outlook only" now launches the new Outlook through its app ID (packaged
-  apps can't be started by exe path over RemoteApp). New installs also turn
-  off automatic sign-in, which left a desktop session that blanked RemoteApp.
+  Opening MS Mail now goes straight to the Outlook-only view. The full
+  desktop is the "Windows desktop" connection on Guacamole's home page.
 dependencies: []
 defaultUsername: "outlook"
 deterministicPassword: true
